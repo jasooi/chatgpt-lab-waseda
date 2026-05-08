@@ -212,6 +212,40 @@
     letter-spacing: 0.5px;
   }
 
+  /* OpenAI Staff Highlight */
+  .openai-highlight {
+    margin: 24px 36px;
+    padding: 20px 24px;
+    background: linear-gradient(135deg, rgba(255,107,53,0.08), rgba(139,26,43,0.1));
+    border: 1px solid rgba(255,107,53,0.25);
+    border-left: 3px solid var(--accent-orange);
+    position: relative;
+    z-index: 2;
+    animation: fadeSlideIn 0.8s ease-out 1.15s both;
+  }
+
+  .openai-highlight .highlight-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--accent-orange);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .openai-highlight .highlight-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--off-white);
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+  }
+
+  .openai-highlight .highlight-text .accent {
+    color: var(--accent-orange);
+    font-weight: 900;
+  }
+
   /* Info cards */
   .info-grid {
     display: grid;
@@ -293,6 +327,13 @@
     margin-bottom: 16px;
   }
 
+  .title-jp {
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 1px;
+    font-size: 11px;
+    opacity: 0.6;
+  }
+
   .audience-tags {
     display: flex;
     flex-wrap: wrap;
@@ -314,6 +355,81 @@
     content: '→ ';
     color: #6BA6F0;
     font-weight: 700;
+  }
+
+  /* Perks / 参加特典 */
+  .perks-section {
+    padding: 20px 36px;
+    position: relative;
+    z-index: 2;
+    animation: fadeSlideIn 0.8s ease-out 2s both;
+  }
+
+  .perks-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--neon-green);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .perks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .perk-card {
+    background: rgba(185,255,102,0.06);
+    border: 1px solid rgba(185,255,102,0.15);
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+    animation: cardSlide 0.6s ease-out 2.1s both;
+  }
+
+  .perk-card:nth-child(2) {
+    animation-delay: 2.2s;
+  }
+
+  .perk-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-green), transparent);
+    opacity: 0.5;
+  }
+
+  .perk-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--neon-green);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .perk-value {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--off-white);
+    line-height: 1.4;
+  }
+
+  .perk-value span {
+    color: var(--neon-green);
+  }
+
+  .perk-desc {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--warm-gray);
+    margin-top: 6px;
+    line-height: 1.5;
   }
 
   /* CTA */
@@ -487,9 +603,11 @@
   @media (max-width: 500px) {
     .info-grid { grid-template-columns: 1fr; }
     .cta-roles { grid-template-columns: 1fr; }
+    .perks-grid { grid-template-columns: 1fr; }
     .top-bar { padding: 20px 24px; }
-    .hero, .tagline, .info-grid, .audience, .cta-section, .poster-footer { padding-left: 24px; padding-right: 24px; }
+    .hero, .tagline, .info-grid, .audience, .perks-section, .cta-section, .poster-footer { padding-left: 24px; padding-right: 24px; }
     .divider { margin-left: 24px; margin-right: 24px; }
+    .openai-highlight { margin-left: 24px; margin-right: 24px; }
   }
 </style>
 </head>
@@ -527,10 +645,19 @@
       誰かの<span class="em">「発見」</span>になる。
     </p>
     <p class="sub">
-      就活、授業、日常の意思決定——<br>
-      ChatGPTをどう活かしてる？<br>
-      学生同士で使い方をシェアする実践型イベント。
+      就活、授業、日常の意思決定など——<br>
+      ChatGPT / Codex / Image Genをどのように活用していますか？<br>
+      AIの活用方法について、参加者同士で気軽にディスカッションしながら、<br>
+      コツや工夫を共有できるインタラクティブなイベントです。
     </p>
+  </div>
+
+  <div class="openai-highlight">
+    <div class="highlight-label">Special Guest</div>
+    <div class="highlight-text">
+      <span class="accent">OpenAIスタッフ</span>もファシリテーターとして参加予定です。<br>
+      学生同士の交流に加え、OpenAIスタッフとも直接お話しいただけます。
+    </div>
   </div>
 
   <div class="info-grid">
@@ -559,17 +686,34 @@
       <div class="info-label">Fee</div>
       <div class="info-value">
         無料
-        <small>学生なら誰でもOK</small>
+        <small>18~24歳の学生なら誰でもOK</small>
       </div>
     </div>
   </div>
 
   <div class="audience">
-    <div class="audience-title">Who should come?</div>
+    <div class="audience-title">Who should come? <span class="title-jp">── こんな方におすすめ</span></div>
     <div class="audience-tags">
       <div class="tag">ChatGPTをもっと使いこなしたい</div>
       <div class="tag">他の人の活用法を覗きたい</div>
       <div class="tag">実践的なアイデアを交換したい</div>
+      <div class="tag">OpenAIのスタッフと直接話したい</div>
+    </div>
+  </div>
+
+  <div class="perks-section">
+    <div class="perks-title">Perks <span class="title-jp">── 参加特典</span></div>
+    <div class="perks-grid">
+      <div class="perk-card">
+        <div class="perk-badge">全参加者</div>
+        <div class="perk-value">ChatGPT Plus<br><span>1ヶ月分</span></div>
+        <div class="perk-desc">参加するだけでもらえる</div>
+      </div>
+      <div class="perk-card">
+        <div class="perk-badge">発表者</div>
+        <div class="perk-value">ChatGPT Plus<br><span>3ヶ月分</span></div>
+        <div class="perk-desc">発表者として選ばれた方に</div>
+      </div>
     </div>
   </div>
 
